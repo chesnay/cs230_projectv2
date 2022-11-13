@@ -1,0 +1,16 @@
+# Compiled source #
+###################
+*.pyc
+
+
+# CSV #
+###################
+*.csv
+
+
+# pt  #
+##################
+#PyTorch saves tensors as .pt files, which can be quite large
+ 
+*.pt
+
