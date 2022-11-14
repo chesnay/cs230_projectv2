@@ -13,9 +13,12 @@ conda update conda
 ```
 
 
-create a virtual environment in Conda, for example:
+Create and activate a virtual environment in Conda:
 ```
-conda create -n yourenvname python=3.8
+conda create -n knowledge_tracing python=3.8
+
+conda create activate knowledge_tracing
+
 
 ```
 
