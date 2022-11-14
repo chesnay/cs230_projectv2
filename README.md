@@ -20,9 +20,14 @@ conda activate knowledge_tracing
 
 ```
 
-To run the trained model, run the following in the root directory: 
+Install the required dependency using PIP3 by running the following command in the root directory of the project:
 ```
 $ pip install -r requirements.txt
-$ python main.py --config_file config/akt.yaml
+
+```
+
+To run the trained model, run the following in the root directory of the project: 
+```
+$ python main.py --config_file config/ak.yaml
 
 ```
