@@ -1,5 +1,4 @@
-pandas==1.5.1
-torch==1.12.1.post201
+torch==1.12.1
 tqdm==4.50.2
 transformers==3.4.0
 huggingface-hub==0.10.1
