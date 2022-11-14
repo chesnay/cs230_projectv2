@@ -21,7 +21,7 @@ sudo apt install python3-pip
 
 create a virtual environment in Conda, for example:
 ```
-conda create -n yourenvname
+conda create -n yourenvname python=3.8
 
 ```
 
