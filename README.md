@@ -4,6 +4,14 @@ This repo contains the code for *Exploring deep knowledge tracing to improve stu
 **Project authors**: Francois Chesnay (fchesnay), Heidi Kim (hyunsunk), and Cameron Mohne (mohnec1). 
 
 ## Setup
+Install Conda
+
+Check conda is up to date:
+conda update conda
+
+create a virtual environment in Conda, for example:
+conda create -n yourenvname
+
 
 To run the trained model, run the following in the root directory: 
 ```
