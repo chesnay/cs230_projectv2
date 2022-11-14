@@ -35,7 +35,7 @@ $ pip3 install -r requirements.txt
 
 To install the Kaggle library using pip:
 ```
-pip install kaggle
+pip3 install kaggle
 
 ```
 Download the dataset from Kaggle at https://www.kaggle.com/competitions/riiid-test-answer-prediction/data and install it in the input directory using the following commands:
