@@ -12,6 +12,13 @@ conda update conda
 
 ```
 
+Install pip
+```
+sudo apt install python3-pip
+
+```
+
+
 create a virtual environment in Conda, for example:
 ```
 conda create -n yourenvname
