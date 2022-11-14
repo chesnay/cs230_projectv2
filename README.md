@@ -3,6 +3,14 @@ This repo contains the code for *Exploring deep knowledge tracing to improve stu
 
 **Project authors**: Francois Chesnay (fchesnay), Heidi Kim (hyunsunk), and Cameron Mohne (mohnec1) @stanford.edu. 
 
+## Description of the dataset
+
+Tailoring education to a student's ability level is one of the many valuable things an AI tutor can do. Your challenge in this competition is a version of that overall task; you will predict whether students are able to answer their next questions correctly. You'll be provided with the same sorts of information a complete education app would have: that student's historic performance, the performance of other students on the same question, metadata about the question itself, and more.
+
+Dataset is available at: https://www.kaggle.com/competitions/riiid-test-answer-prediction/data
+
+
+
 ## Setup
 Install Conda
 
