@@ -8,15 +8,15 @@ Install Conda
 
 Check conda is up to date:
 ```
-conda update conda
+$ conda update conda
 
 ```
 
 
 Create and activate a virtual environment in Conda:
 ```
-conda create -n knowledge_tracing python=3.8
-conda activate knowledge_tracing
+$ conda create -n knowledge_tracing python=3.8
+$ conda activate knowledge_tracing
 
 ```
 
@@ -26,8 +26,14 @@ $ pip install -r requirements.txt
 
 ```
 
+Download the dataset from Kaggle at https://www.kaggle.com/competitions/riiid-test-answer-prediction/data and install it in the input directory:
+
+
+## Running the models
+
 To run the trained model, run the following in the root directory of the project: 
 ```
+$ conda activate
 $ python main.py --config_file config/ak.yaml
 
 ```
