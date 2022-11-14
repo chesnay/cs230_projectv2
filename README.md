@@ -1,7 +1,7 @@
 # Knowledge tracing to improve student performance
-This repo contains the code for *Exploring deep knowledge tracing to improve student performance*, a final project for the Fall 2023 sequence of CS230. 
+This repo contains the code for *Exploring deep knowledge tracing to improve student performance*, a final project for the Fall 2022 sequence of CS230. 
 
-**Project authors**: Francois Chesnay (fchesnay), Heidi Kim (hyunsunk), and Cameron Mohne (mohnec1). 
+**Project authors**: Francois Chesnay (fchesnay), Heidi Kim (hyunsunk), and Cameron Mohne (mohnec1) @stanford.edu. 
 
 ## Setup
 Install Conda
