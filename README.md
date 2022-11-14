@@ -41,7 +41,7 @@ pip install kaggle
 Download the dataset from Kaggle at https://www.kaggle.com/competitions/riiid-test-answer-prediction/data and install it in the input directory using the following commands:
 ```
 $ cd input
-$ 
+$ kaggle competitions download -c riiid-test-answer-prediction 
 
 ```
 For help on configuring the Kaggle library, please see https://towardsdatascience.com/how-to-search-and-download-data-using-kaggle-api-f815f7b98080
