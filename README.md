@@ -1,13 +1,13 @@
-## kaggle_riiid
+# Knowledge tracing to improve student performance
+This repo contains the code for *Exploring deep knowledge tracing to improve student performance*, a final project for the Fall 2023 sequence of CS230. 
 
-Base for CS230 Project uisng the transformer part of 12th place solution in [Riiid! Answer Correctness Prediction](https://www.kaggle.com/c/riiid-test-answer-prediction).
+**Project authors**: Francois Chesnay (fchesnay), Heidi Kim (hyunsunk), and Cameron Mohne (mohnec1). 
 
-Please see [here](https://www.kaggle.com/c/riiid-test-answer-prediction/discussion/209683) for more information.
+## Setup
 
-### Execution
-
-You need to specify which configuration file to use.
-
+To run the trained model, run the following in the root directory: 
 ```
+$ pip install -r requirements.txt
 $ python main.py --config_file config/akt.yaml
+
 ```
