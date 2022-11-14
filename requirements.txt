@@ -6,3 +6,4 @@ tqdm==4.50.2
 transformers==3.4.0
 huggingface-hub==0.10.1
 PyYAML==6.0
+protobuf==3.20.3
