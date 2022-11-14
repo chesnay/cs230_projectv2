@@ -41,7 +41,7 @@ Download the dataset from Kaggle at https://www.kaggle.com/competitions/riiid-te
 
 To run the trained model, run the following in the root directory of the project: 
 ```
-$ conda activate
+$ conda activate knowledge_tracing
 $ python main.py --config_file config/ak.yaml
 
 ```
