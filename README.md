@@ -44,7 +44,7 @@ $ cd input
 $ kaggle competitions download -c riiid-test-answer-prediction 
 
 ```
-Unzip riiid-test-answer-prediction.zip and copy in the directory input the files lectures.csv, questions.csv and train.csv, as well as the directory riiid-test-answer-prediction.
+Unzip riiid-test-answer-prediction.zip and copy in the directory **input** the files lectures.csv, questions.csv and train.csv, as well as the directory **riiid-test-answer-prediction**.
 
 
 For help on configuring the Kaggle library, please see https://towardsdatascience.com/how-to-search-and-download-data-using-kaggle-api-f815f7b98080
