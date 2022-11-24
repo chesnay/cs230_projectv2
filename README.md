@@ -66,3 +66,17 @@ $ python main.py --config_file config/saint.yaml
 
 ```
 
+or
+```
+$ conda activate knowledge_tracing
+$ python main.py --config_file config/saint_cameron.yaml
+
+```
+
+or
+```
+$ conda activate knowledge_tracing
+$ python main.py --config_file config/saint_francois.yaml
+
+```
+
