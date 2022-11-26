@@ -64,7 +64,7 @@ A Simple pyTorch implementation of "Towards an Appropriate Query, Key, and Value
 **SAINT**: Separated Self-AttentIve Neural Knowledge Tracing. SAINT has an encoder-decoder structure where exercise and response embedding sequence separately enter the encoder and the decoder respectively, which allows to stack attention layers multiple times.  
 
 ## SAINT model architecture  
-<img src="https://github.com/chesnay/cs230_projectv2/arch_from_original_paper.JPG">
+<img src="https://github.com/chesnay/cs230_projectv2/blob/master/arch_from_original_paper.jpeg">
 
 
 ## Running the model
