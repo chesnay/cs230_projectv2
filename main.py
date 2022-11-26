@@ -55,7 +55,8 @@ def main():
             'prior_question_elapsed_time': 'float32'
         }
 
-        train_df = pd.read_csv(DATA_DIR + 'train.csv', usecols=usecols, dtype=dtype)
+        train_df = pd.read_csv('./input/tiny-train.csv', usecols=usecols, dtype=dtype)
+        # train_df = pd.read_csv(DATA_DIR + 'train.csv', usecols=usecols, dtype=dtype)
         question_df = pd.read_csv(DATA_DIR + 'questions.csv', usecols=['question_id', 'part'])
 
     train_df = train_df[train_df['content_type_id'] == 0].reset_index(drop=True)

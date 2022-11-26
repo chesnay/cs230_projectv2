@@ -3,7 +3,7 @@ import math
 import torch
 from torch import nn
 from transformers import BertModel, BertPreTrainedModel
-from transformers.modeling_bert import (
+from transformers.models.bert.modeling_bert import (
     BertEncoder, apply_chunking_to_forward,
     BertSelfAttention, BertAttention, BertLayer
 )
