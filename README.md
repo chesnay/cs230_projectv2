@@ -8,6 +8,12 @@ Tailoring education to a student's ability level is one of the many valuable thi
 
 Dataset is available at: https://www.kaggle.com/competitions/riiid-test-answer-prediction/data
 
+A comprehensive description of the dataset is provided in the article *EdNet: A Large-Scale Hierarchical Dataset in Education* available at at: https://arxiv.org/abs/1912.03072
+
+
+ ## Metrics
+ - Binary AUC
+
 
 
 ## Setup
@@ -50,14 +56,19 @@ Unzip riiid-test-answer-prediction.zip and copy in the directory **input** the f
 For help on configuring the Kaggle library, please see https://towardsdatascience.com/how-to-search-and-download-data-using-kaggle-api-f815f7b98080
 
 
-## Running the models
+# SAINT-pytorch
+A Simple pyTorch implementation of "Towards an Appropriate Query, Key, and Value Computation for Knowledge Tracing" based on https://arxiv.org/abs/2002.07033.  
 
-To run the trained model, run the following in the root directory of the project: 
-```
-$ conda activate knowledge_tracing
-$ python main.py --config_file config/akt.yaml
 
-```
+
+**SAINT**: Separated Self-AttentIve Neural Knowledge Tracing. SAINT has an encoder-decoder structure where exercise and response embedding sequence separately enter the encoder and the decoder respectively, which allows to stack attention layers multiple times.  
+
+## SAINT model architecture  
+<img src="https://github.com/chesnay/cs230_projectv2/arch_from_original_paper.JPG">
+
+
+## Running the model
+
 
 or
 ```
@@ -66,17 +77,5 @@ $ python main.py --config_file config/saint.yaml
 
 ```
 
-or
-```
-$ conda activate knowledge_tracing
-$ python main.py --config_file config/saint_cameron.yaml
 
-```
-
-or
-```
-$ conda activate knowledge_tracing
-$ python main.py --config_file config/saint_francois.yaml
-
-```
 
