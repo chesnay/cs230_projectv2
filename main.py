@@ -20,6 +20,9 @@ from src.optim import NoamLR
 from src.utils import set_seed, timer
 from src.validation import virtual_time_split
 
+from captum.attr import IntegratedGradients
+from captum.attr import LayerConductance
+from captum.attr import NeuronConductance
 
 def main():
     parser = ArgumentParser()
@@ -42,28 +45,60 @@ def main():
             'user_id',
             'content_id',
             'content_type_id',
+            'task_container_id',
+            'user_answer',
             'answered_correctly',
             'prior_question_elapsed_time', 
-        ]
+            'prior_question_had_explanation',
+        ]#
         dtype = {
             'row_id': 'int64',
             'timestamp': 'int64',
             'user_id': 'int32',
             'content_id': 'int16',
             'content_type_id': 'int8',
+            'task_container_id': 'int16',
+            'user_answer': 'int8',
             'answered_correctly':'int8',
-            'prior_question_elapsed_time': 'float32'
+            'prior_question_elapsed_time': 'float32',
+            'prior_question_had_explanation': 'boolean'
         }
 
         train_df = pd.read_csv(DATA_DIR + 'train.csv', usecols=usecols, dtype=dtype)
         question_df = pd.read_csv(DATA_DIR + 'questions.csv', usecols=['question_id', 'part'])
+        # print the list using tolist()
+        print("The column headers of train.csv are :")
+        print(train_df.columns.tolist())
+        print("The column headers of questions.csv are :")
+        print(question_df.columns.tolist())
+
 
     train_df = train_df[train_df['content_type_id'] == 0].reset_index(drop=True)
+    print("A number of column headers of train.csv are dropped and the remainig headers are :")
+    print(train_df.columns.tolist())
+    
+    print()
+   
+
+            
 
     question_df['part'] += 1  # 0: padding id, 1: start id
     train_df['content_id'] += 2  # 0: padding id, 1: start id
     question_df['question_id'] += 2
     train_df = train_df.merge(question_df, how='left', left_on='content_id', right_on='question_id')
+
+    print("Basic statistics description of the dataset:")
+    for header_title in train_df.columns:
+        print(header_title)
+        print( train_df[header_title].describe())
+        print()
+
+    print('Print unique data to also check that there are no NA')
+    print('content_type_id: ',train_df['content_type_id'].unique())    
+    print('user_answer: ',train_df['user_answer'].unique())    
+    print('answered_correctly: ',train_df['answered_correctly'].unique())    
+    print('prior_question_had_explanation: ',train_df['prior_question_had_explanation'].unique()) 
+
 
     with timer('validation split'):
         train_idx, valid_idx, epoch_valid_idx = virtual_time_split(train_df,
@@ -164,6 +199,32 @@ def main():
     elapsed_time = time.time() - start_time
     print(f'all processes done in {elapsed_time / 60:.1f} min.')
 
+    # To apply integrated gradients, we first create an IntegratedGradients 
+    # object from the Captum interpretability library, providing the 
+    # model object.
+    IntegratedGradients(model)
 
+    # To compute the integrated gradients, we use the attribute method of the 
+    # IntegratedGradients object. The method takes tensor(s) of input examples 
+    # (matching the forward function of the model), and returns the input 
+    # attributions for the given examples. For a network with multiple outputs, 
+    # a target index must also be provided, defining the index of the output 
+    # for which gradients are computed. For this example, we provide target = 1,
+    # corresponding to wrong answer.
+
+    # The input tensor provided should require grad, so we call requires\_grad\_ 
+    # on the tensor. The attribute method also takes a baseline, which is the 
+    # starting point from which gradients are integrated. The default value is 
+    # just the 0 tensor, which is a reasonable baseline / default for this task.  
+
+    # The returned values of the attribute method are the attributions, which 
+    # match the size of the given inputs, and delta, which approximates the 
+    # error between the approximated integral and true integral.
+
+    #test_input_tensor.requires_grad_()
+    #attr, delta = ig.attribute(test_input_tensor,target=1, return_convergence_delta=True)
+    #attr = attr.detach().numpy()    
+
+    
 if __name__ == '__main__':
     main()
