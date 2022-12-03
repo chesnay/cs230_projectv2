@@ -144,15 +144,15 @@ def main():
     # This function transforms a list (of length num_samples) of sequences (lists of integers) into a 2D Numpy array 
     # print("tags:", tags)
     max_dim_rows=len(tags)
-    max_dim_cols=0
-    for tag_test in tags:
-        if len(tag_test)>max_dim_cols:
-            max_dim_cols=len(tag_test)
+    #max_dim_cols=0
+    #for tag_test in tags:
+    #    if len(tag_test)>max_dim_cols:
+    #        max_dim_cols=len(tag_test)
 
-    max_dim_cols2 = len(max(tags, key=len))  
-    print("max_dim_rows",max_dim_rows)
-    print("max_dim_cols",max_dim_cols)
-    print("max_dim_cols2",max_dim_cols2)
+    #max_dim_cols2 = len(max(tags, key=len))  
+    #print("max_dim_rows",max_dim_rows)
+    #print("max_dim_cols",max_dim_cols)
+    #print("max_dim_cols2",max_dim_cols2)
     #numpy_array_tags=
     maxlen = len(max(tags, key=len))
     lens = [len(l) for l in tags]  
@@ -161,7 +161,7 @@ def main():
     arr[mask] = np.concatenate(tags)  
 
     encoded_questions['tags'] = arr.tolist()
-    exit(0)
+ 
     
     encoded_questions  = encoded_questions.merge(question_stats, 
                             how = 'left', 
