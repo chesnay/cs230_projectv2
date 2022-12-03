@@ -140,13 +140,29 @@ def main():
     encoded_questions['correct_answer'] = questions.correct_answer
     encoded_questions['part'] = questions.part
     tags = questions.tags.fillna('').apply(lambda x: [1+int(t) for t in str(x).split()])
-    #encoded_questions['tags'] = tf.keras.preprocessing.sequence.pad_sequences(tags).tolist()
-    print("tags:", tags)
+    # encoded_questions['tags'] = tf.keras.preprocessing.sequence.pad_sequences(tags).tolist()
+    # This function transforms a list (of length num_samples) of sequences (lists of integers) into a 2D Numpy array 
+    # print("tags:", tags)
+    max_dim_rows=len(tags)
+    max_dim_cols=0
     for tag_test in tags:
-        print(len(tag_test))
-    exit(0)
-    encoded_questions['tags'] = pad_sequence(torch.FloatTensor(tags)).tolist()
+        if len(tag_test)>max_dim_cols:
+            max_dim_cols=len(tag_test)
 
+    max_dim_cols2 = len(max(tags, key=len))  
+    print("max_dim_rows",max_dim_rows)
+    print("max_dim_cols",max_dim_cols)
+    print("max_dim_cols2",max_dim_cols2)
+    #numpy_array_tags=
+    maxlen = len(max(tags, key=len))
+    lens = [len(l) for l in tags]  
+    arr = np.zeros((len(tags),maxlen),int)
+    mask =  (np.arange(maxlen) >= maxlen-np.array(lens)[:,None])
+    arr[mask] = np.concatenate(tags)  
+
+    encoded_questions['tags'] = arr.tolist()
+    exit(0)
+    
     encoded_questions  = encoded_questions.merge(question_stats, 
                             how = 'left', 
                             on=['content_id', 'content_type_id']).fillna(0)
