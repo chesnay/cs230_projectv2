@@ -123,78 +123,78 @@ def main():
     question_stats = question_stats[['content_id', 'content_type_id', 'difficulty', 'popularity']]
 
 
-####### Adding part in relation to videos##################
+# ####### Adding part in relation to videos##################
 
 
 
-    #
-    # Generate ids for question & lecture metadata for embeddings
-    #
-    questions = pd.read_csv(DATA_DIR + 'questions.csv')
-    lectures = pd.read_csv(DATA_DIR + 'lectures.csv')
+#     #
+#     # Generate ids for question & lecture metadata for embeddings
+#     #
+#     questions = pd.read_csv(DATA_DIR + 'questions.csv')
+#     lectures = pd.read_csv(DATA_DIR + 'lectures.csv')
 
-    encoded_questions = pd.DataFrame(data=questions[['question_id']].values, columns=['content_id'])
-    encoded_questions['content_type_id'] = False
-    encoded_questions['encoded_question_id'] = LabelEncoder().fit_transform(questions.question_id)
-    encoded_questions['bundle_id'] = LabelEncoder().fit_transform(questions.bundle_id)
-    encoded_questions['correct_answer'] = questions.correct_answer
-    encoded_questions['part'] = questions.part
-    tags = questions.tags.fillna('').apply(lambda x: [1+int(t) for t in str(x).split()])
-    # encoded_questions['tags'] = tf.keras.preprocessing.sequence.pad_sequences(tags).tolist()
-    # This function transforms a list (of length num_samples) of sequences (lists of integers) into a 2D Numpy array 
-    # print("tags:", tags)
-    max_dim_rows=len(tags)
-    #max_dim_cols=0
-    #for tag_test in tags:
-    #    if len(tag_test)>max_dim_cols:
-    #        max_dim_cols=len(tag_test)
+#     encoded_questions = pd.DataFrame(data=questions[['question_id']].values, columns=['content_id'])
+#     encoded_questions['content_type_id'] = False
+#     encoded_questions['encoded_question_id'] = LabelEncoder().fit_transform(questions.question_id)
+#     encoded_questions['bundle_id'] = LabelEncoder().fit_transform(questions.bundle_id)
+#     encoded_questions['correct_answer'] = questions.correct_answer
+#     encoded_questions['part'] = questions.part
+#     tags = questions.tags.fillna('').apply(lambda x: [1+int(t) for t in str(x).split()])
+#     # encoded_questions['tags'] = tf.keras.preprocessing.sequence.pad_sequences(tags).tolist()
+#     # This function transforms a list (of length num_samples) of sequences (lists of integers) into a 2D Numpy array 
+#     # print("tags:", tags)
+#     max_dim_rows=len(tags)
+#     #max_dim_cols=0
+#     #for tag_test in tags:
+#     #    if len(tag_test)>max_dim_cols:
+#     #        max_dim_cols=len(tag_test)
 
-    #max_dim_cols2 = len(max(tags, key=len))  
-    #print("max_dim_rows",max_dim_rows)
-    #print("max_dim_cols",max_dim_cols)
-    #print("max_dim_cols2",max_dim_cols2)
-    #numpy_array_tags=
-    maxlen = len(max(tags, key=len))
-    lens = [len(l) for l in tags]  
-    arr = np.zeros((len(tags),maxlen),int)
-    mask =  (np.arange(maxlen) >= maxlen-np.array(lens)[:,None])
-    arr[mask] = np.concatenate(tags)  
+#     #max_dim_cols2 = len(max(tags, key=len))  
+#     #print("max_dim_rows",max_dim_rows)
+#     #print("max_dim_cols",max_dim_cols)
+#     #print("max_dim_cols2",max_dim_cols2)
+#     #numpy_array_tags=
+#     maxlen = len(max(tags, key=len))
+#     lens = [len(l) for l in tags]  
+#     arr = np.zeros((len(tags),maxlen),int)
+#     mask =  (np.arange(maxlen) >= maxlen-np.array(lens)[:,None])
+#     arr[mask] = np.concatenate(tags)  
 
-    encoded_questions['tags'] = arr.tolist()
+#     encoded_questions['tags'] = arr.tolist()
  
     
-    encoded_questions  = encoded_questions.merge(question_stats, 
-                            how = 'left', 
-                            on=['content_id', 'content_type_id']).fillna(0)
+#     encoded_questions  = encoded_questions.merge(question_stats, 
+#                             how = 'left', 
+#                             on=['content_id', 'content_type_id']).fillna(0)
 
-    encoded_lectures = pd.DataFrame(data=lectures[['lecture_id']].values, columns=['content_id'])
-    encoded_lectures['content_type_id'] = True
+#     encoded_lectures = pd.DataFrame(data=lectures[['lecture_id']].values, columns=['content_id'])
+#     encoded_lectures['content_type_id'] = True
 
-    encoded_lectures['encoded_lecture_id'] = LabelEncoder().fit_transform(lectures.lecture_id)
-    encoded_lectures['part'] = lectures.part
-    encoded_lectures['tag'] = LabelEncoder().fit_transform(lectures.tag)
-    encoded_lectures['type_of'] = LabelEncoder().fit_transform(lectures.type_of)
+#     encoded_lectures['encoded_lecture_id'] = LabelEncoder().fit_transform(lectures.lecture_id)
+#     encoded_lectures['part'] = lectures.part
+#     encoded_lectures['tag'] = LabelEncoder().fit_transform(lectures.tag)
+#     encoded_lectures['type_of'] = LabelEncoder().fit_transform(lectures.type_of)
 
-    # Append questions and lectures table, create new index to have
-    # a common id (encoded_content_id)
-    encoded_content = pd.DataFrame.from_dict({
-        'content_id':questions.question_id,
-        'content_type_id':len(questions)*[False]
-    }).append(
-        pd.DataFrame.from_dict({
-        'content_id':lectures.lecture_id,
-        'content_type_id':len(lectures)*[True]
-        })
-    )
-    encoded_content['encoded_content_id'] = range(len(encoded_content))
+#     # Append questions and lectures table, create new index to have
+#     # a common id (encoded_content_id)
+#     encoded_content = pd.DataFrame.from_dict({
+#         'content_id':questions.question_id,
+#         'content_type_id':len(questions)*[False]
+#     }).append(
+#         pd.DataFrame.from_dict({
+#         'content_id':lectures.lecture_id,
+#         'content_type_id':len(lectures)*[True]
+#         })
+#     )
+#     encoded_content['encoded_content_id'] = range(len(encoded_content))
 
-    #
-    # Put the generated encoded_content_id in the train table, 
-    # 
+#     #
+#     # Put the generated encoded_content_id in the train table, 
+#     # 
 
-    train_df = train_df.merge(encoded_content, on=['content_id', 'content_type_id'], how = 'left')
-    train_df = train_df.drop(columns = ['content_id', 'content_type_id', 'task_container_id'])
-    train_df = train_df.astype({'question_had_explanation': 'boolean', 'encoded_content_id':'int32', 'time_lag':'float32'})
+#     train_df = train_df.merge(encoded_content, on=['content_id', 'content_type_id'], how = 'left')
+#     train_df = train_df.drop(columns = ['content_id', 'content_type_id', 'task_container_id'])
+#     train_df = train_df.astype({'question_had_explanation': 'boolean', 'encoded_content_id':'int32', 'time_lag':'float32'})
 
 
 
