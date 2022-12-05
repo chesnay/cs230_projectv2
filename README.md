@@ -69,10 +69,14 @@ A Simple pyTorch implementation of "Towards an Appropriate Query, Key, and Value
 
 ## Running the model
 
-
-or
 ```
 $ conda activate knowledge_tracing
+
+```
+
+
+
+```
 $ python main.py --config_file config/saint.yaml
 
 ```
